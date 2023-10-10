@@ -4,7 +4,9 @@ import PokemonContext from './Context';
 import ApiCall from '../../api/API';
 
 export default function PokemonProvider({children}){
+
   const [pokemons, setPokemons] = useState([]);
+  const [pokemon, setPokemon] = useState({})
 
   const getPokemon = async () => {
     try {
@@ -16,8 +18,19 @@ export default function PokemonProvider({children}){
     }
   };
 
+  const getPokemonDetail = async (id) =>{
+    if(!id) Promise.reject("Indicar pokemon a analizar") ;
+    try {
+      const pokemonResult = await ApiCall({url: `https://pokeapi.co/api/v2/pokemon/${id}/`});
+      setPokemon(pokemonResult)
+    } catch (error) {
+      setPokemon({});
+    }
+  }
+
   return (
-    <PokemonContext.Provider value={{getPokemon, pokemons}}>
+    <PokemonContext.Provider 
+      value={{getPokemon, pokemons, getPokemonDetail, pokemon}}>
         {children}
     </PokemonContext.Provider>
   );
