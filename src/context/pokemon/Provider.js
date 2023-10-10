@@ -8,7 +8,7 @@ export default function PokemonProvider({children}){
 
   const getPokemon = async () => {
     try {
-      const pokemonsResult = await ApiCall({url: ' https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0'});
+      const pokemonsResult = await ApiCall({url: ' https://pokeapi.co/api/v2/pokemon?limit=100&offset=0'});
       setPokemons(pokemonsResult.results);
     } catch (error) {
       //Aqui caería el error en caso que caiga la llamda a la API

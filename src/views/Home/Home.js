@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useContext } from 'react';
 
 import PokemonContext from '../../context/pokemon/Context';
+import PokemonList from './components/PokemonList/PokemonList';
 
 const Home = () => {
 
@@ -13,10 +14,10 @@ const Home = () => {
     getPokemon().catch(null);
   },[] );
 
-  console.log(pokemons);
-
   return (
-    <div>Home</div>
+    <>
+      <PokemonList pokemons={pokemons}/>
+    </>
   )
 }
 
