@@ -2,7 +2,7 @@ import React from 'react';
 import{ BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './views/Home/Home';
-import Fourofour from './views/404';
+import Fourofour from './views/404/404';
 
 export default function Ruta() {
   return (
