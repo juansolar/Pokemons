@@ -8,12 +8,17 @@ import PokemonList from './components/PokemonList/PokemonList';
 const Home = () => {
 
   //El getPokemon permite llamar la API
-  const {getPokemon, pokemons} = useContext(PokemonContext);
+  const {getPokemon, pokemons, isLoading} = useContext(PokemonContext);
   
   useEffect( () =>{
     getPokemon().catch(null);
   },[] );
 
+  if(isLoading){
+    //Agregar un logo de cargue
+    return <div>Esta cargando...</div>
+}
+  
   return (
     <>
       <PokemonList pokemons={pokemons}/>
