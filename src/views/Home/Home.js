@@ -4,24 +4,24 @@ import { useContext } from 'react';
 
 import PokemonContext from '../../context/pokemon/Context';
 import PokemonList from './components/PokemonList/PokemonList';
+import Loading from '../../components/loading/Loading';
+import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 
 const Home = () => {
 
   //El getPokemon permite llamar la API
-  const {getPokemon, pokemons, isLoading} = useContext(PokemonContext);
+  const {getPokemon, pokemons, isLoading, hasError, errorMessage} = useContext(PokemonContext);
   
   useEffect( () =>{
     getPokemon().catch(null);
   },[] );
 
-  if(isLoading){
-    //Agregar un logo de cargue
-    return <div>Esta cargando...</div>
-}
-  
   return (
     <>
       <PokemonList pokemons={pokemons}/>
+      {hasError && <ErrorMessage message={errorMessage}/>}
+      {/* //Agregar un logo de cargue */}
+      {isLoading && <Loading title='Cargando pokemons...' />}
     </>
   )
 }
