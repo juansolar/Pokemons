@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import PokemonContext from '../../context/pokemon/Context';
+import usePokemonStore from '../../zustand/stores/pokemons';
 import PokeStats from './components/pokeStats/PokeStats';
 import Loading from '../../components/loading/Loading';
 import ErrorMessage from '../../components/errorMessage/ErrorMessage';
@@ -9,7 +9,14 @@ import ErrorMessage from '../../components/errorMessage/ErrorMessage';
 const PokemonDetail = () => {
     //Permite atrapar los parametros que vengan en la URL
     const {id} = useParams();
-    const {getPokemonDetail, pokemon, isLoading, hasError, errorMessage} = useContext(PokemonContext);
+    const {getPokemonDetail, pokemon, isLoading, hasError, errorMessage} = 
+        usePokemonStore(state => ({
+            getPokemonDetail: state.getPokemonDetail,
+            pokemon: state.pokemon,
+            isLoading: state.isLoading,
+            hasError: state.hasError,
+            errorMessage: state.errorMessage
+        }));
 
     useEffect( () =>{
         getPokemonDetail(id).catch(null);
