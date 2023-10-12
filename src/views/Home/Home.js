@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-//Permitira ir a buscar el contexto (Pokemon) y utilizarlo en este componente
+import shallow from 'zustand/shallow';
 
 import PokemonList from './components/PokemonList/PokemonList';
 import Loading from '../../components/loading/Loading';
@@ -16,8 +16,11 @@ const Home = () => {
         isLoading: state.isLoading, 
         hasError: state.hasError, 
         errorMessage: state.errorMessage
-      }));
+  }), shallow);
   
+  //para utilizar un unico elemento del useStore se puede utilizar getState() para obetnerlo
+  //const pokemons = usePokemonStore.getState().pokemons;
+
   useEffect( () =>{
     getPokemon().catch(null);
   },[] );
